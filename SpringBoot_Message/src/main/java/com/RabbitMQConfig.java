@@ -8,28 +8,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMQConfig 
-{
+public class RabbitMQConfig {
 
     public static final String QUEUE_NAME = "message_queue";
     public static final String EXCHANGE_NAME = "hello-exchange";
-    public static final String ROUTING_KEY = "hello.key";
+    public static final String ROUTING_KEY = "hello_key";
 
     @Bean
-    public Queue helloQueue() 
-    {
-        return new Queue(QUEUE_NAME, false);
+    Queue queue() {
+        return new Queue(QUEUE_NAME);
     }
 
     @Bean
-    public DirectExchange helloExchange() 
-    {
+    DirectExchange exchange() {
         return new DirectExchange(EXCHANGE_NAME);
     }
 
     @Bean
-    public Binding binding(Queue helloQueue, DirectExchange helloExchange) 
-    {
-        return BindingBuilder.bind(helloQueue).to(helloExchange).with(ROUTING_KEY);
+    Binding binding(Queue queue, DirectExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
     }
 }

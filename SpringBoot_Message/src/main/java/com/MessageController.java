@@ -1,28 +1,31 @@
 package com;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
 public class MessageController {
 
-    private final MessageSender messageSender;
-    private final MessageReceiver messageReceiver;
+    private final MessageProducer producer;
+    private final MessageConsumer consumer;
 
-    public MessageController(MessageSender messageSender, MessageReceiver messageReceiver) {
-        this.messageSender = messageSender;
-        this.messageReceiver = messageReceiver;
+    public MessageController(MessageProducer producer, MessageConsumer consumer) {
+        this.producer = producer;
+        this.consumer = consumer;
     }
 
     @PostMapping("/send")
-    public String sendMessage(@RequestBody String message) {
-        System.out.println("Received POST request with message: " + message);
-        messageSender.sendMessage(message);
+    public String send(@RequestParam String message) {
+        producer.send(message);
         return "Message sent: " + message;
     }
 
     @GetMapping("/receive")
-    public String getMessage() {
-        return messageReceiver.lastMessage != null ? messageReceiver.lastMessage : "No message received yet.";
+    public String receive() {
+        return consumer.getLastMessage();
     }
 }
