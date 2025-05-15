@@ -1,0 +1,11 @@
+package com;
+
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+public class MyExceptionHandler 
+{
+	@ExceptionHandler(MyException.class)
+	{
+		
+	}
+}

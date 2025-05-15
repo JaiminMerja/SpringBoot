@@ -1,0 +1,18 @@
+package com;
+
+import org.springframework.stereotype.Controller;
+
+
+import com.example.exception.MyException;
+
+
+@RestController
+public class ReContr 
+{
+	@GetMapping("/test")
+	public String testException() 
+	{
+		throw new MyException("This is custom exception");
+	}
+	
+}

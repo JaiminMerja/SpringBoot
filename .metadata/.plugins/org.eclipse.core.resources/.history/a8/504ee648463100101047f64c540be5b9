@@ -1,0 +1,13 @@
+package com;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+
+public class MessageSender 
+{
+	private final RabbitTemplate rabbittemplate;
+	
+	public Sender(RabbitTemplate rabbitTemplate)
+	{
+		this.rabbittemplate = rabbitTemplate;
+	}
+}

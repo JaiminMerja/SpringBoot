@@ -1,0 +1,23 @@
+package com;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MessageSender 
+{
+	private RabbitTemplate rabbittemplate = new RabbitTemplate();
+	
+	public void Sender(RabbitTemplate rabbitTemplate)
+	{
+		this.rabbittemplate = rabbitTemplate;
+	}
+	
+	@Scheduled(fixedDelay = 1000)
+	public void sendTime()
+	{
+		rabbittemplate.convertAndSend("hello", "Hello World, from Spring Boot over RabbitMQ!");
+		System.out.println("Message Sent!!!!!");
+	}
+}

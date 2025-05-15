@@ -1,0 +1,22 @@
+package com;
+
+import java.time.LocalTime;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ScheduleTask 
+{
+//	@Scheduled(fixedRate = 1000)
+//	public void fixedRateTask()
+//	{
+//		System.out.println("Delay:"+LocalTime.now());
+//	}
+	
+	@Scheduled(initialDelay = 1000, fixedDelay = 2000)
+	public void fixedRateTask()
+	{
+		System.out.println("Dealy:"+LocalTime.now());
+	}
+}

@@ -1,0 +1,10 @@
+package com;
+
+@Configuration
+public class RabbitMQConfig {
+    @Bean
+    public Queue helloQueue() {
+        return new Queue("hello", false);
+    }
+}
+

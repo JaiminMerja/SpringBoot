@@ -1,0 +1,19 @@
+package com;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class DIController 
+{
+	private final DIService dis;
+	
+	public DIController (DIService dis)
+	{
+		this.dis = dis;
+	}
+	
+	public void eat()
+	{
+		
+	}
+}

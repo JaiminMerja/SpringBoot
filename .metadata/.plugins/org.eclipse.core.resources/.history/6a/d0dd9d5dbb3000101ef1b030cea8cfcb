@@ -1,0 +1,54 @@
+package com;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.*;
+
+@Service
+public class FileStorageService {
+
+    // Specify the directory where files will be stored
+    private final Path uploadDir = Paths.get("uploads").toAbsolutePath().getFileName();  // This is relative to the root of your project
+
+    // Method to store the file (image)
+    public String storeFile(MultipartFile file) {
+        try {
+            // Ensure the upload directory exists
+            if (!Files.exists(uploadDir)) {
+                // Try to create the directory and log if successful
+            	Files.createDirectories(uploadDir);
+                
+                System.out.println("Directory created: " + uploadDir.toAbsolutePath());  // Debug log
+            }
+
+            // Log if the directory exists
+            if (Files.exists(uploadDir)) {
+                System.out.println("Upload directory exists at: " + uploadDir.toAbsolutePath());
+            } else {
+                System.out.println("Failed to create or locate upload directory.");
+            }
+
+            // Get the original file name
+            String fileName = file.getOriginalFilename();
+
+            if (fileName == null) {
+                throw new IllegalArgumentException("File name is missing");
+            }
+
+            // Resolve the file path to the upload directory
+            Path filePath = uploadDir.resolve(fileName);
+
+            // Log the path to see where it's being stored
+            System.out.println("File will be saved at: " + filePath.toAbsolutePath());
+
+            // Copy the file to the specified location
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            return fileName;  // Return the file name
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to store file", e);
+        }
+    }
+}
