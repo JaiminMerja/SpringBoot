@@ -1,32 +1,21 @@
 package com;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-@RestController
+@Service
 public class MessageSender 
 {
     private final RabbitTemplate rabbitTemplate;
 
-    private final MessageReceiver messagereceiver;
-    
-    public MessageSender(RabbitTemplate rabbitTemplate,MessageReceiver messagereceiver) 
+    public MessageSender(RabbitTemplate rabbitTemplate)
     {
         this.rabbitTemplate = rabbitTemplate;
-        this.messagereceiver = messagereceiver;
     }
-    
-    @GetMapping("/send")
-    public String sendManually() 
+
+    public void sendMessage(String message) 
     {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, "Jimmy");
-        return "Message sent manually!";
-    }
-    
-    @GetMapping("/receive")
-    public String receive() 
-    {
-        return messagereceiver.ms;
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, message);
+        System.out.println("Message sent to queue: " + message);
     }
 }
