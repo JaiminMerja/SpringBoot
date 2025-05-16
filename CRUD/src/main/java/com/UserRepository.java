@@ -17,7 +17,8 @@ public class UserRepository
     private final RowMapper<User> userRowMapper = new RowMapper<>() 
     {
         @Override
-        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException 
+        {
             return new User(
                 rs.getLong("id"),
                 rs.getString("name"),

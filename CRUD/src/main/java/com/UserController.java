@@ -19,10 +19,11 @@ public class UserController
 
     // Create user
     @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) 
+    {
         try {
-            int rows = userRepository.save(user);
-            if (rows > 0) {
+            	int rows = userRepository.save(user);
+            	if (rows > 0) {
                 return ResponseEntity.ok("User created successfully");
             } 
             else 
