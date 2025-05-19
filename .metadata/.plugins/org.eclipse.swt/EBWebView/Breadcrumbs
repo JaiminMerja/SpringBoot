@@ -184,3 +184,7 @@
 0:25:36 Tab2 StartNav77 #typed
 0:25:36 Tab2 FinishNav77
 0:25:36 Tab2 PageLoad
+0:28:59 Tab2 StartNav78 #typed
+0:28:59 Tab2 FinishNav78
+0:28:59 Tab2 PageLoad
+0:30:24 Microsoft.Shutdown.OnWindowClosing
