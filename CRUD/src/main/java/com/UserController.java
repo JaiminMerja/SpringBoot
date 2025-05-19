@@ -23,13 +23,14 @@ public class UserController
     {
         try {
             	int rows = userRepository.save(user);
-            	if (rows > 0) {
-                return ResponseEntity.ok("User created successfully");
-            } 
-            else 
-            {
-                return ResponseEntity.status(500).body("Failed to create user");
-            }
+            	if (rows > 0) 
+            	{
+            		return ResponseEntity.ok("User created successfully");
+            	} 
+            	else 
+            	{
+            		return ResponseEntity.status(500).body("Failed to create user");
+            	}
         } 
         catch (Exception e) 
         {
