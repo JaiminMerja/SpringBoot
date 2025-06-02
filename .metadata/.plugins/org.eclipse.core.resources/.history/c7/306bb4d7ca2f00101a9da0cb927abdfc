@@ -1,9 +1,0 @@
-package com;
-
-public class DIService 
-{
-	public void animal()
-	{
-		System.out.println("Animal are Enjoying their life.....");
-	}
-}

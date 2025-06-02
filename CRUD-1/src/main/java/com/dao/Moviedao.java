@@ -22,13 +22,13 @@ public class Moviedao
 		return jdbcTemplate.update(sql,movie.getId(), movie.getTitle(), movie.getGenre(), movie.getRating());
 	}
 	
-	//READALL
+	//READ ALL
 	public List<Movie> getAllMovie()
 	{
 		return jdbcTemplate.query("SELECT * FROM movies", BeanPropertyRowMapper.newInstance(Movie.class));
 	}
 	
-	//READONE
+	//READ ONE
 	public Movie getMovieById(int id)
 	{
 		String sql = "SELECT * FROM movies WHERE id = ?";
